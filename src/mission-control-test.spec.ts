@@ -42,35 +42,35 @@ for (const c of cases) {
     // used so every field mismatch is reported in one run rather than stopping
     // at the first. This is the layer that catches the UI-to-API seam bugs.
     //
-    // const submitRequest = wizardPage.waitForSubmitRequest();
-    // await wizardPage.clickDeploy();
-    // const payload = (await submitRequest).postDataJSON();
-    //
-    // expect.soft(payload.serviceName, 'serviceName').toBe(c.expectedPayload.serviceName);
-    // expect.soft(payload.region, 'region').toBe(c.expectedPayload.region);
-    // expect.soft(payload.priority, 'priority (SC-B21 when red)').toBe(c.expectedPayload.priority);
-    // expect.soft(payload.alertsEnabled, 'alertsEnabled (SC-B04 when red)').toBe(c.expectedPayload.alertsEnabled);
-    // expect.soft(payload.deploymentWindow, 'deploymentWindow').toBe(c.expectedPayload.deploymentWindow);
-    // expect.soft(payload.alertThreshold, 'alertThreshold').toBe(c.expectedPayload.alertThreshold);
-    // expect.soft(sorted(payload.notificationChannels), 'notificationChannels').toEqual(sorted(c.expectedPayload.notificationChannels));
-    // expect.soft(sorted(payload.accessRoles), 'accessRoles').toEqual(sorted(c.expectedPayload.accessRoles));
-    // expect.soft(payload.deploymentNotes, 'deploymentNotes').toBe(c.expectedPayload.deploymentNotes);
+    const submitRequest = wizardPage.waitForSubmitRequest();
+    await wizardPage.clickDeploy();
+    const payload = (await submitRequest).postDataJSON();
+    
+    expect.soft(payload.serviceName, 'serviceName').toBe(c.expectedPayload.serviceName);
+    expect.soft(payload.region, 'region').toBe(c.expectedPayload.region);
+    expect.soft(payload.priority, 'priority (SC-B21 when red)').toBe(c.expectedPayload.priority);
+    expect.soft(payload.alertsEnabled, 'alertsEnabled (SC-B04 when red)').toBe(c.expectedPayload.alertsEnabled);
+    expect.soft(payload.deploymentWindow, 'deploymentWindow').toBe(c.expectedPayload.deploymentWindow);
+    expect.soft(payload.alertThreshold, 'alertThreshold').toBe(c.expectedPayload.alertThreshold);
+    expect.soft(sorted(payload.notificationChannels), 'notificationChannels').toEqual(sorted(c.expectedPayload.notificationChannels));
+    expect.soft(sorted(payload.accessRoles), 'accessRoles').toEqual(sorted(c.expectedPayload.accessRoles));
+    expect.soft(payload.deploymentNotes, 'deploymentNotes').toBe(c.expectedPayload.deploymentNotes);
 
     // ===== MODE B: SUMMARY-SCREEN VALIDATION (default) ====================
     // Assert the rendered Summary instead of the request. Intentionally noisier:
     // also surfaces the Service Name / Region swap (SC-B20) and the raw-ISO
     // date (SC-B22) on every row, and depends on a successful submit, which
     // the random upstream (SC-O06) does not guarantee.
-    await wizardPage.clickDeploy();
-    await expect(page.getByText(LOCATORS.summary.successHeading)).toBeVisible();
+    // await wizardPage.clickDeploy();
+    // await expect(page.getByText(LOCATORS.summary.successHeading)).toBeVisible();
 
-    await expect.soft(wizardPage.summaryValue(LOCATORS.summary.serviceName)).toHaveText(c.expectedSummary.serviceName);
-    await expect.soft(wizardPage.summaryValue(LOCATORS.summary.region)).toHaveText(c.expectedSummary.region);
-    await expect.soft(wizardPage.summaryValue(LOCATORS.summary.priority)).toHaveText(c.expectedSummary.priority);
-    await expect.soft(wizardPage.summaryValue(LOCATORS.summary.alertsEnabled)).toHaveText(c.expectedSummary.alertsEnabled);
-    await expect.soft(wizardPage.summaryValue(LOCATORS.summary.deploymentWindow)).toHaveText(c.expectedSummary.deploymentWindow);
-    await expect.soft(wizardPage.summaryValue(LOCATORS.summary.alertThreshold)).toHaveText(c.expectedSummary.alertThreshold);
-    await expect.soft(wizardPage.summaryValue(LOCATORS.summary.notificationChannels)).toHaveText(c.expectedSummary.notificationChannels);
-    await expect.soft(wizardPage.summaryValue(LOCATORS.summary.accessRoles)).toHaveText(c.expectedSummary.accessRoles);
+    // await expect.soft(wizardPage.summaryValue(LOCATORS.summary.serviceName)).toHaveText(c.expectedSummary.serviceName);
+    // await expect.soft(wizardPage.summaryValue(LOCATORS.summary.region)).toHaveText(c.expectedSummary.region);
+    // await expect.soft(wizardPage.summaryValue(LOCATORS.summary.priority)).toHaveText(c.expectedSummary.priority);
+    // await expect.soft(wizardPage.summaryValue(LOCATORS.summary.alertsEnabled)).toHaveText(c.expectedSummary.alertsEnabled);
+    // await expect.soft(wizardPage.summaryValue(LOCATORS.summary.deploymentWindow)).toHaveText(c.expectedSummary.deploymentWindow);
+    // await expect.soft(wizardPage.summaryValue(LOCATORS.summary.alertThreshold)).toHaveText(c.expectedSummary.alertThreshold);
+    // await expect.soft(wizardPage.summaryValue(LOCATORS.summary.notificationChannels)).toHaveText(c.expectedSummary.notificationChannels);
+    // await expect.soft(wizardPage.summaryValue(LOCATORS.summary.accessRoles)).toHaveText(c.expectedSummary.accessRoles);
   });
 }
