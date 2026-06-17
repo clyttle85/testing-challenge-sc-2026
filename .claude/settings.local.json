@@ -1,0 +1,7 @@
+{
+  "permissions": {
+    "allow": [
+      "PowerShell(Get-ChildItem \"D:\\\\Documents\\\\Code Projects\\\\typescript-playwright\\\\screencloud-mission-control\\\\test-results\" -Recurse -File | ForEach-Object { $_.FullName })"
+    ]
+  }
+}
